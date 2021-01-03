@@ -4,7 +4,7 @@ import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.gui.EcoMenu;
 import com.youtube.hempfest.goldeco.gui.MenuManager;
 import com.youtube.hempfest.goldeco.gui.menus.paginated.InventoryBanks;
-import com.youtube.hempfest.goldeco.listeners.BankListener;
+import com.youtube.hempfest.goldeco.construct.BankListener;
 import com.youtube.hempfest.hempcore.formatting.string.ColoredString;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

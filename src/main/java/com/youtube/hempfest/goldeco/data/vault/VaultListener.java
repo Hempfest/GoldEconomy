@@ -1,16 +1,15 @@
-package com.youtube.hempfest.goldeco.listeners.vault;
+package com.youtube.hempfest.goldeco.data.vault;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
 public class VaultListener {
 
-    private GoldEconomy plugin;
+    private final GoldEconomy plugin;
     private Economy provider;
     private final Logger log = Logger.getLogger("Minecraft");
 

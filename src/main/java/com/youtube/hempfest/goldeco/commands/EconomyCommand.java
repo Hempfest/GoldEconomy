@@ -2,12 +2,13 @@ package com.youtube.hempfest.goldeco.commands;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.independant.Config;
+import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomyHook;
 import com.youtube.hempfest.goldeco.gui.MenuManager;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryShop;
-import com.youtube.hempfest.goldeco.listeners.BankListener;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
-import com.youtube.hempfest.goldeco.listeners.vault.VaultListener;
-import com.youtube.hempfest.goldeco.util.GoldEconomyCommandBase;
+import com.youtube.hempfest.goldeco.construct.BankListener;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
+import com.youtube.hempfest.goldeco.data.vault.VaultListener;
+import com.youtube.hempfest.goldeco.util.libraries.GoldEconomyCommandBase;
 import com.youtube.hempfest.goldeco.util.libraries.ItemManager;
 import com.youtube.hempfest.goldeco.util.libraries.StringLibrary;
 import com.youtube.hempfest.goldeco.util.Utility;
@@ -182,6 +183,9 @@ public class EconomyCommand extends GoldEconomyCommandBase {
                         listener.unhook();
                         listener.hook();
                     }
+                    AdvancedEconomyHook hook = new AdvancedEconomyHook(GoldEconomy.getInstance());
+                    hook.unhook();
+                    hook.hook();
                     sendPrefixedMessage(commandSender, "&b&oReloaded configuration");
                 }
                 if (args[0].equalsIgnoreCase("give")) {

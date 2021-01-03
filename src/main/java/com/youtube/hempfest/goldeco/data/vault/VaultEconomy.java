@@ -1,10 +1,10 @@
-package com.youtube.hempfest.goldeco.listeners.vault;
+package com.youtube.hempfest.goldeco.data.vault;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.PlayerData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.listeners.BankListener;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
+import com.youtube.hempfest.goldeco.construct.BankListener;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Utility;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;

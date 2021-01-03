@@ -1,8 +1,7 @@
-package com.youtube.hempfest.goldeco.listeners;
+package com.youtube.hempfest.goldeco.construct;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.BankData;
-import com.youtube.hempfest.goldeco.structure.EconomyStructure;
 import com.youtube.hempfest.goldeco.util.libraries.StringLibrary;
 import com.youtube.hempfest.goldeco.util.Utility;
 import org.bukkit.Bukkit;
@@ -10,7 +9,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-public class BankListener implements EconomyStructure {
+public class BankListener {
 
     OfflinePlayer op;
     String accountID;
@@ -31,7 +30,7 @@ public class BankListener implements EconomyStructure {
         this.accountID = accountID;
     }
 
-    @Override
+  
     public void set(double amount) {
         BankData bank = new BankData(worldName);
         FileConfiguration fc = bank.getConfig();
@@ -48,7 +47,7 @@ public class BankListener implements EconomyStructure {
         }
     }
 
-    @Override
+  
     public void add(double amount) {
     PlayerListener el = new PlayerListener(op);
         BankData bank = new BankData(worldName);
@@ -72,7 +71,7 @@ public class BankListener implements EconomyStructure {
         }
     }
 
-    @Override
+  
     public void add(double amount, String worldName) {
         PlayerListener el = new PlayerListener(op);
         BankData bank = new BankData(worldName);
@@ -96,7 +95,7 @@ public class BankListener implements EconomyStructure {
         }
     }
 
-    @Override
+  
     public void remove(double amount) {
         PlayerListener el = new PlayerListener(op);
         BankData bank = new BankData(worldName);
@@ -120,12 +119,12 @@ public class BankListener implements EconomyStructure {
         }
     }
 
-    @Override
+  
     public void remove(double amount, String worldName) {
 
     }
 
-    @Override
+  
     public void create() {
     if (!GoldEconomy.getWorlds().contains(worldName)) {
         if (op.isOnline()) {
@@ -152,7 +151,7 @@ public class BankListener implements EconomyStructure {
 
     }
 
-    @Override
+  
     public boolean has(Utility type) {
         boolean result = false;
         switch (type) {
@@ -173,7 +172,7 @@ public class BankListener implements EconomyStructure {
         return result;
     }
 
-    @Override
+  
     public boolean has(Utility type, String worldName) {
         boolean result = false;
         switch (type) {
@@ -193,7 +192,7 @@ public class BankListener implements EconomyStructure {
         return result;
     }
 
-    @Override
+  
     public String get(Utility type) {
         String result = "";
         switch (type) {
@@ -240,17 +239,17 @@ public class BankListener implements EconomyStructure {
         return result;
     }
 
-    @Override
+  
     public double get(Utility type, String item) {
         return 0.0;
     }
 
-    @Override
+  
     public void buy(String item, int amount) {
 
     }
 
-    @Override
+  
     public void sell(String item, int amount) {
 
     }

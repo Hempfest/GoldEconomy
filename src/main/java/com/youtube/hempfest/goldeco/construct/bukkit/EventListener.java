@@ -1,10 +1,10 @@
-package com.youtube.hempfest.goldeco.listeners.bukkit;
+package com.youtube.hempfest.goldeco.construct.bukkit;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.BankData;
 import com.youtube.hempfest.goldeco.data.PlayerData;
 import com.youtube.hempfest.goldeco.gui.EcoMenu;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Utility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

@@ -5,8 +5,8 @@ import com.youtube.hempfest.goldeco.gui.MenuManager;
 import com.youtube.hempfest.goldeco.gui.EcoMenuPaginated;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryBankModify;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryStaff;
-import com.youtube.hempfest.goldeco.listeners.BankAccount;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
+import com.youtube.hempfest.goldeco.construct.BankAccount;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 
 import com.youtube.hempfest.hempcore.HempCore;
 import com.youtube.hempfest.hempcore.formatting.string.ColoredString;

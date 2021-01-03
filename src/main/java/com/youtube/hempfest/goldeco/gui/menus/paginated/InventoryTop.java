@@ -4,7 +4,7 @@ import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.gui.MenuManager;
 import com.youtube.hempfest.goldeco.gui.EcoMenuPaginated;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryShop;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Utility;
 import com.youtube.hempfest.hempcore.HempCore;
 import com.youtube.hempfest.hempcore.formatting.string.ColoredString;

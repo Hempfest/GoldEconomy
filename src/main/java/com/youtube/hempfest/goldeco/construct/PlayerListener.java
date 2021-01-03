@@ -1,10 +1,9 @@
-package com.youtube.hempfest.goldeco.listeners;
+package com.youtube.hempfest.goldeco.construct;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.PlayerData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.structure.EconomyStructure;
-import com.youtube.hempfest.goldeco.util.HighestValue;
+import com.youtube.hempfest.goldeco.util.libraries.HighestValue;
 import com.youtube.hempfest.goldeco.util.Utility;
 import com.youtube.hempfest.goldeco.util.libraries.ItemManager;
 import com.youtube.hempfest.goldeco.util.libraries.StringLibrary;
@@ -25,21 +24,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerListener implements EconomyStructure {
+public class PlayerListener {
 
-    final OfflinePlayer op;
-    final PlayerData data;
-    final FileConfiguration fc;
+    private final PlayerData data;
+    private final FileConfiguration fc;
+    private final UUID id;
+    private OfflinePlayer op;
 
 //    public PlayerListener() {} // No longer using no-args for static actions
 
     public PlayerListener(@NotNull OfflinePlayer op) {
         this.op = op;
         this.data = PlayerData.get(op.getUniqueId()); // online+offline objects return same uuid
+        this.id = op.getUniqueId();
         this.fc = data.getConfig();
     }
 
-    @Override
+    public PlayerListener(@NotNull UUID uuid) {
+        this.id = uuid;
+        this.data = PlayerData.get(uuid); // online+offline objects return same uuid
+        this.fc = data.getConfig();
+    }
+
+  
     public void set(double amount) {
         StringLibrary me = new StringLibrary(op.getPlayer()); // TODO: null check?
 //        if (op != null) { // this null-check no longer needed object will not exist with null op
@@ -57,7 +64,7 @@ public class PlayerListener implements EconomyStructure {
         data.saveConfig();
     }
 
-    @Override
+  
     public void add(double amount) {
         StringLibrary me = new StringLibrary(op.getPlayer()); // TODO: null-check
 //        final PlayerData data = PlayerData.get(op.getUniqueId());
@@ -76,7 +83,7 @@ public class PlayerListener implements EconomyStructure {
         data.saveConfig();
     }
 
-    @Override
+  
     public void add(double amount, String worldName) {
         StringLibrary me = new StringLibrary(op.getPlayer()); // TODO: null-check
         if (op.isOnline()) {
@@ -93,7 +100,7 @@ public class PlayerListener implements EconomyStructure {
         data.saveConfig();
     }
 
-    @Override
+  
     public void remove(double amount) {
         StringLibrary me = new StringLibrary(op.getPlayer());
         if (op.isOnline()) {
@@ -110,7 +117,7 @@ public class PlayerListener implements EconomyStructure {
         data.saveConfig();
     }
 
-    @Override
+  
     public void remove(double amount, String worldName) {
         StringLibrary me = new StringLibrary(op.getPlayer());
         if (op.isOnline()) {
@@ -127,12 +134,12 @@ public class PlayerListener implements EconomyStructure {
         data.saveConfig();
     }
 
-    @Override
+  
     public void create() {
 
     }
 
-    @Override
+  
     public boolean has(Utility type) {
         boolean result = false;
         switch (type) {
@@ -151,7 +158,7 @@ public class PlayerListener implements EconomyStructure {
         return result;
     }
 
-    @Override
+  
     public boolean has(Utility type, String worldName) {
         boolean result = false;
         switch (type) {
@@ -164,7 +171,7 @@ public class PlayerListener implements EconomyStructure {
         return result;
     }
 
-    @Override
+  
     public String get(Utility type) {
         String result = "";
         switch (type) {
@@ -180,8 +187,19 @@ public class PlayerListener implements EconomyStructure {
         return result;
     }
 
-    @Override
-    public double get(Utility type, String item) {
+    public String get(Utility type, String world) {
+        String result = "";
+        switch (type) {
+            case BALANCE:
+//                if (op != null) { // op is never null but is not always online/Player
+                result = format(fc.getDouble("player." + world + ".balance"));
+                break;
+        }
+        return result;
+    }
+
+  
+    public double getItem(Utility type, String item) {
         double result = 0.0;
         Config items = Config.get("shop_items");
         switch (type) {
@@ -197,7 +215,7 @@ public class PlayerListener implements EconomyStructure {
 
     public boolean isInventoryFull(Player p) { return (p.getInventory().firstEmpty() == -1); }
 
-    @Override
+  
     public void buy(String item, int amount) { // TODO: This method needs to decide how to deal with OfflinePlayers
         StringLibrary me = new StringLibrary(op.getPlayer());
 //        GoldEconomy plugin = GoldEconomy.getInstance();
@@ -227,7 +245,7 @@ public class PlayerListener implements EconomyStructure {
         }
     }
 
-    @Override
+  
     public void sell(String item, int amount) { // TODO: null-check getPlayer
         StringLibrary me = new StringLibrary(op.getPlayer());
         Config items = Config.get("shop_items");

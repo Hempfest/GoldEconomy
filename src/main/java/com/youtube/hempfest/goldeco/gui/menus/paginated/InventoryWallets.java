@@ -5,7 +5,7 @@ import com.youtube.hempfest.goldeco.gui.MenuManager;
 import com.youtube.hempfest.goldeco.gui.EcoMenuPaginated;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryPlayerModify;
 import com.youtube.hempfest.goldeco.gui.menus.InventoryStaff;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.hempcore.HempCore;
 import com.youtube.hempfest.hempcore.formatting.string.ColoredString;
 import org.bukkit.*;

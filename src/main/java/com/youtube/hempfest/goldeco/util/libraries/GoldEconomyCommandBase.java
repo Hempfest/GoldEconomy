@@ -1,4 +1,4 @@
-package com.youtube.hempfest.goldeco.util;
+package com.youtube.hempfest.goldeco.util.libraries;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import org.bukkit.ChatColor;

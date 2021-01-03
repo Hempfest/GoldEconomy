@@ -1,32 +1,19 @@
 package com.youtube.hempfest.goldeco;
 
-//import com.youtube.hempfest.goldeco.commands.*;
+
 import com.youtube.hempfest.goldeco.data.BankData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
+import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomy;
+import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomyHook;
+import com.youtube.hempfest.goldeco.data.vault.VaultEconomy;
+import com.youtube.hempfest.goldeco.data.vault.VaultListener;
 import com.youtube.hempfest.goldeco.gui.MenuManager;
-import com.youtube.hempfest.goldeco.listeners.BankListener;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
-import com.youtube.hempfest.goldeco.listeners.bukkit.EventListener;
-import com.youtube.hempfest.goldeco.listeners.vault.VaultEconomy;
-import com.youtube.hempfest.goldeco.listeners.vault.VaultListener;
-import com.youtube.hempfest.goldeco.structure.EconomyStructure;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Metrics;
 import com.youtube.hempfest.hempcore.command.CommandBuilder;
 import com.youtube.hempfest.hempcore.event.EventBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-//import org.bukkit.command.CommandMap;
-//import org.bukkit.command.defaults.BukkitCommand;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.io.File;
 import java.io.InputStream;
-//import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +21,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class GoldEconomy extends JavaPlugin {
@@ -41,8 +34,9 @@ public class GoldEconomy extends JavaPlugin {
 	//Instance
 	private static GoldEconomy instance;
 	private final Logger log = Logger.getLogger("Minecraft");
-	private static final HashMap<Player, MenuManager> GuiMap = new HashMap<Player, MenuManager>();
+	private static final HashMap<Player, MenuManager> GuiMap = new HashMap<>();
 	public VaultEconomy eco;
+	public AdvancedEconomy advancedEconomy;
 	private final PluginManager pm = getServer().getPluginManager();
 
 	//Start server
@@ -56,6 +50,7 @@ public class GoldEconomy extends JavaPlugin {
 		loadConfiguration();
 		loadDefaults();
 		registerVault();
+		registerEconomyExpansion();
 	}
 	
 	public void onDisable() {
@@ -86,6 +81,12 @@ public class GoldEconomy extends JavaPlugin {
 				pm.disablePlugin(this);
 			}
 		}
+	}
+
+	private void registerEconomyExpansion() {
+		advancedEconomy = new AdvancedEconomy();
+		AdvancedEconomyHook hook = new AdvancedEconomyHook(this);
+		hook.hook();
 	}
 
 	private void registerMetrics(int ID) {
@@ -198,14 +199,6 @@ public class GoldEconomy extends JavaPlugin {
 			result = main.getConfig().getBoolean("Economy.using-shop");
 		}
 		return result;
-	}
-
-	public static EconomyStructure getPlayerAccount(OfflinePlayer p) {
-		return new PlayerListener(p);
-	}
-
-	public static EconomyStructure getBankAccount(OfflinePlayer p, String accountID) {
-		return new BankListener(p);
 	}
 
 	public static List<String> getWorlds() throws NullPointerException {

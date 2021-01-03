@@ -5,7 +5,7 @@
 
 	<groupId>com.youtube.hempfest.goldeco</groupId>
 	<artifactId>GoldEconomy</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<packaging>jar</packaging>
 
 	<name>GoldEconomy</name>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.github.Hempfest</groupId>
 			<artifactId>HempCore</artifactId>
-			<version>1.0.6</version>
+			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

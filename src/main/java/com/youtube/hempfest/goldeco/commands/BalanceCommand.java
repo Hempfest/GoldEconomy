@@ -1,7 +1,7 @@
 package com.youtube.hempfest.goldeco.commands;
 
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.util.GoldEconomyCommandBase;
+import com.youtube.hempfest.goldeco.util.libraries.GoldEconomyCommandBase;
 import com.youtube.hempfest.goldeco.util.libraries.StringLibrary;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

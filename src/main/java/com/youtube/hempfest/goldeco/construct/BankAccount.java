@@ -1,10 +1,8 @@
-package com.youtube.hempfest.goldeco.listeners;
+package com.youtube.hempfest.goldeco.construct;
 
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import com.youtube.hempfest.goldeco.data.BankData;
-import java.util.UUID;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class BankAccount {

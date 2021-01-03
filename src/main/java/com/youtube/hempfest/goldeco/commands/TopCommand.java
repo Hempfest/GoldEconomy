@@ -2,12 +2,19 @@ package com.youtube.hempfest.goldeco.commands;
 
 import com.youtube.hempfest.goldeco.data.PlayerData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.listeners.PlayerListener;
-import com.youtube.hempfest.goldeco.util.GoldEconomyCommandBase;
-import com.youtube.hempfest.goldeco.util.versions.ComponentR1_16;
-import com.youtube.hempfest.goldeco.util.versions.ComponentR1_8_1;
-import com.youtube.hempfest.goldeco.util.HighestValue;
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
+import com.youtube.hempfest.goldeco.util.libraries.GoldEconomyCommandBase;
+import com.youtube.hempfest.goldeco.util.libraries.HighestValue;
 import com.youtube.hempfest.goldeco.util.libraries.StringLibrary;
+import com.youtube.hempfest.hempcore.formatting.component.Text;
+import com.youtube.hempfest.hempcore.formatting.component.Text_R2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -15,8 +22,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-
-import java.util.*;
 
 public class TopCommand extends GoldEconomyCommandBase {
     private static final List<String> ALIASES = new ArrayList<>(Collections.singletonList("richest"));
@@ -95,11 +100,11 @@ public class TopCommand extends GoldEconomyCommandBase {
                         if ((((page * o) + i1 + 1) == k) && (k != ((page * o) + o + 1))) {
                             i1++;
                             if (Bukkit.getServer().getVersion().contains("1.16")) {
-                                sendComponent(p, ComponentR1_16.textRunnable(p, "",
+                                sendComponent(p, new Text().textRunnable("",
                                         " &7# &3&l" + k + " &b&o" + nextTop + " &7: &6&l" + PlayerListener.format(nextTopBal),
                                         "&6" + nextTop + " &a&oplaces &7#&6" + k + "&a&o on page " + pagee + ".", "shop"));
                             } else {
-                                sendComponent(p, ComponentR1_8_1.textRunnable( "",
+                                sendComponent(p, Text_R2.textRunnable( "",
                                         " &7# &3&l" + k + " &b&o" + nextTop + " &7: &6&l" + PlayerListener.format(nextTopBal),
                                         "&6" + nextTop + " &a&oplaces &7#&6" + k + "&a&o on page " + pagee + ".", "shop"));
                             }
@@ -114,16 +119,16 @@ public class TopCommand extends GoldEconomyCommandBase {
                     int point; point = page + 1; if (page >= 1) {
                         int last; last = point - 1; point = point + 1;
                         if (Bukkit.getServer().getVersion().contains("1.16")) {
-                            sendComponent(p, ComponentR1_16.textRunnable(p, "&b&oNavigate &7[", "&3&lCLICK", "&7] : &7[", "&c&lCLICK&7]", "&b&oClick this to goto the &5&onext page.", "&b&oClick this to go &d&oback a page.", "top " + point, "top " + last));
+                            sendComponent(p, new Text().textRunnable("&b&oNavigate &7[", "&3&lCLICK", "&7] : &7[", "&c&lCLICK&7]", "&b&oClick this to goto the &5&onext page.", "&b&oClick this to go &d&oback a page.", "top " + point, "top " + last));
                         } else {
-                            sendComponent(p, ComponentR1_8_1.textRunnable( "&b&oNavigate &7[", "&3&lCLICK", "&7] : &7[", "&c&lCLICK&7]", "&b&oClick this to goto the &5&onext page.", "&b&oClick this to go &d&oback a page.", "top " + point, "top " + last));
+                            sendComponent(p, Text_R2.textRunnable( "&b&oNavigate &7[", "&3&lCLICK", "&7] : &7[", "&c&lCLICK&7]", "&b&oClick this to goto the &5&onext page.", "&b&oClick this to go &d&oback a page.", "top " + point, "top " + last));
                         }
                     } if (page == 0) {
                         point = page + 1 + 1;
                         if (Bukkit.getServer().getVersion().contains("1.16")) {
-                            sendComponent(p, ComponentR1_16.textRunnable(p, "&b&oNavigate &7[", "&3&lCLICK", "&7]", "&b&oClick this to goto the &5&onext page.", "top " + point));
+                            sendComponent(p, new Text().textRunnable("&b&oNavigate &7[", "&3&lCLICK", "&7]", "&b&oClick this to goto the &5&onext page.", "top " + point));
                         } else {
-                            sendComponent(p, ComponentR1_8_1.textRunnable( "&b&oNavigate &7[", "&3&lCLICK", "&7]", "&b&oClick this to goto the &5&onext page.", "top " + point));
+                            sendComponent(p, Text_R2.textRunnable( "&b&oNavigate &7[", "&3&lCLICK", "&7]", "&b&oClick this to goto the &5&onext page.", "top " + point));
                         }
                     }
 
