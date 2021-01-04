@@ -6,5 +6,6 @@ depend:
   - HempCore
 soft-depend:
   - Vault
+  - Hemponomics
 description: A customizable economy plugin
 main: com.youtube.hempfest.goldeco.GoldEconomy
