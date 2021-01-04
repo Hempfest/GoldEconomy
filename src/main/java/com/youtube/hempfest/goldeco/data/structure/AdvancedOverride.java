@@ -179,11 +179,11 @@ public class AdvancedOverride implements AdvancedEconomy {
 		if (data.exists()) {
 			FileConfiguration fc = data.getConfig();
 			if (offlinePlayer.isOnline()) {
-				if (fc.getDouble(offlinePlayer.getPlayer().getWorld().getName() + ".balance") >= v) {
+				if (fc.getDouble("player." + offlinePlayer.getPlayer().getWorld().getName() + ".balance") >= v) {
 					return true;
 				}
 			}
-			return fc.getDouble(GoldEconomy.getMainWorld() + ".balance") >= v;
+			return fc.getDouble("player." + GoldEconomy.getMainWorld() + ".balance") >= v;
 		}
 		return false;
 	}
@@ -193,7 +193,7 @@ public class AdvancedOverride implements AdvancedEconomy {
 		final PlayerData data = PlayerData.get(offlinePlayer.getUniqueId());
 		if (data.exists()) {
 			FileConfiguration fc = data.getConfig();
-			return fc.getDouble(s + ".balance") >= v;
+			return fc.getDouble("player." + s + ".balance") >= v;
 		}
 		return false;
 	}
