@@ -3,7 +3,7 @@ package com.youtube.hempfest.goldeco;
 
 import com.youtube.hempfest.goldeco.data.BankData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomy;
+import com.youtube.hempfest.goldeco.data.structure.AdvancedOverride;
 import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomyHook;
 import com.youtube.hempfest.goldeco.data.vault.VaultEconomy;
 import com.youtube.hempfest.goldeco.data.vault.VaultListener;
@@ -36,7 +36,7 @@ public class GoldEconomy extends JavaPlugin {
 	private final Logger log = Logger.getLogger("Minecraft");
 	private static final HashMap<Player, MenuManager> GuiMap = new HashMap<>();
 	public VaultEconomy eco;
-	public AdvancedEconomy advancedEconomy;
+	public AdvancedOverride advancedOverride;
 	private final PluginManager pm = getServer().getPluginManager();
 
 	//Start server
@@ -84,7 +84,7 @@ public class GoldEconomy extends JavaPlugin {
 	}
 
 	private void registerEconomyExpansion() {
-		advancedEconomy = new AdvancedEconomy();
+		advancedOverride = new AdvancedOverride();
 		AdvancedEconomyHook hook = new AdvancedEconomyHook(this);
 		hook.hook();
 	}
