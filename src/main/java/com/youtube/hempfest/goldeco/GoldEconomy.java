@@ -71,22 +71,24 @@ public class GoldEconomy extends JavaPlugin {
 	}
 
 	private void registerVault() {
-		if (usingVault()) {
 			if (pm.isPluginEnabled("Vault")) {
 				eco = new VaultEconomy();
 				VaultListener listener = new VaultListener(this);
 				listener.hook();
 			} else {
-				log.severe(String.format("[%s] - Vault not found. Disable " + '"' + "check-for-vault" + '"' + " in " + '"' + "shop_config.yml" + '"', getDescription().getName()));
-				pm.disablePlugin(this);
+				if (usingVault()) {
+					log.severe(String.format("[%s] - Vault not found. Disable " + '"' + "check-for-vault" + '"' + " in " + '"' + "shop_config.yml" + '"', getDescription().getName()));
+					pm.disablePlugin(this);
+				}
 			}
-		}
 	}
 
 	private void registerEconomyExpansion() {
-		advancedOverride = new AdvancedOverride();
-		AdvancedEconomyHook hook = new AdvancedEconomyHook(this);
-		hook.hook();
+		if (Bukkit.getPluginManager().isPluginEnabled("Hemponomics")) {
+			advancedOverride = new AdvancedOverride();
+			AdvancedEconomyHook hook = new AdvancedEconomyHook(this);
+			hook.hook();
+		}
 	}
 
 	private void registerMetrics(int ID) {

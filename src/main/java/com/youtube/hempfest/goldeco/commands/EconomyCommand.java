@@ -639,9 +639,10 @@ public class EconomyCommand extends GoldEconomyCommandBase {
                 }
 //                PlayerListener list = new PlayerListener();
                 String uuid = "";
-                for (String id : PlayerListener.getAllPlayers()) {
-                    if (PlayerListener.nameByUUID(UUID.fromString(id)).equals(args[1])) {
-                        uuid = id;
+                for (OfflinePlayer op : Bukkit.getOfflinePlayers()) {
+                    if (op.getName().equalsIgnoreCase(args[1])) {
+                        uuid = op.getUniqueId().toString();
+                        break;
                     }
                 }
                 OfflinePlayer pl = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
