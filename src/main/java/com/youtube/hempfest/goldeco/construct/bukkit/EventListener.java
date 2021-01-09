@@ -6,6 +6,8 @@ import com.youtube.hempfest.goldeco.data.PlayerData;
 import com.youtube.hempfest.goldeco.gui.EcoMenu;
 import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Utility;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,24 +21,40 @@ public class EventListener implements Listener {
 
     private void loadPlayerFiles(Player player) {
         final PlayerData data = PlayerData.get(player.getUniqueId());
-        BankData world = new BankData(player.getWorld().getName());
-        FileConfiguration fc = data.getConfig();
-        fc.set("player." + player.getWorld().getName() + ".balance", GoldEconomy.startingBalance());
-        if (!world.exists()) {
-            FileConfiguration fc2 = world.getConfig();
-            fc2.createSection("banks");
-            world.saveConfig();
+        if (!data.exists()) {
+            for (World w : Bukkit.getWorlds()) {
+                BankData world = new BankData(w.getName());
+                FileConfiguration fc = data.getConfig();
+                fc.set("player." + w.getName() + ".balance", GoldEconomy.startingBalance());
+                if (!world.exists()) {
+                    FileConfiguration fc2 = world.getConfig();
+                    fc2.createSection("banks");
+                    world.saveConfig();
+                }
+            }
+            data.saveConfig();
+        } else {
+            if (data.getConfig().getKeys(false).isEmpty()) {
+                for (World w : Bukkit.getWorlds()) {
+                    BankData world = new BankData(w.getName());
+                    FileConfiguration fc = data.getConfig();
+                    fc.set("player." + w.getName() + ".balance", GoldEconomy.startingBalance());
+                    if (!world.exists()) {
+                        FileConfiguration fc2 = world.getConfig();
+                        fc2.createSection("banks");
+                        world.saveConfig();
+                    }
+                }
+                data.saveConfig();
+            }
         }
-        data.saveConfig();
+
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerLogin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        PlayerListener el = new PlayerListener(p);
-        if (!el.has(Utility.BALANCE)) {
-            loadPlayerFiles(p);
-        }
+        loadPlayerFiles(p);
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

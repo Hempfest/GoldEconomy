@@ -1,6 +1,6 @@
 package com.youtube.hempfest.goldeco.data.structure;
 
-import com.youtube.hempfest.economy.construct.AdvancedEconomy;
+import com.youtube.hempfest.economy.construct.implement.AdvancedEconomy;
 import com.youtube.hempfest.goldeco.GoldEconomy;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;

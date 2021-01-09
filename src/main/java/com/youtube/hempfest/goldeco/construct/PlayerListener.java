@@ -144,14 +144,16 @@ public class PlayerListener {
         boolean result = false;
         switch (type) {
             case BALANCE:
-                if (op.getPlayer() != null) { // I think you mean op.getPlayer(), so
-                    if (fc.isDouble("player." + op.getPlayer().getWorld().getName() + ".balance")) {
+                if (data.exists()) {
+                    if (op.getPlayer().isOnline()) { // I think you mean op.getPlayer(), so
+                        if (fc.isDouble("player." + op.getPlayer().getWorld().getName() + ".balance")) {
+                            result = true;
+                        }
+                        break;
+                    }
+                    if (fc.isDouble("player." + GoldEconomy.getMainWorld() + ".balance")) {
                         result = true;
                     }
-                    break;
-                }
-                if (fc.isDouble("player." + GoldEconomy.getMainWorld() + ".balance")) {
-                    result = true;
                 }
                 break;
         }

@@ -1,14 +1,14 @@
 package com.youtube.hempfest.goldeco;
 
 
+import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.data.BankData;
 import com.youtube.hempfest.goldeco.data.independant.Config;
-import com.youtube.hempfest.goldeco.data.structure.AdvancedOverride;
 import com.youtube.hempfest.goldeco.data.structure.AdvancedEconomyHook;
+import com.youtube.hempfest.goldeco.data.structure.HemponomicEconomy;
 import com.youtube.hempfest.goldeco.data.vault.VaultEconomy;
 import com.youtube.hempfest.goldeco.data.vault.VaultListener;
 import com.youtube.hempfest.goldeco.gui.MenuManager;
-import com.youtube.hempfest.goldeco.construct.PlayerListener;
 import com.youtube.hempfest.goldeco.util.Metrics;
 import com.youtube.hempfest.hempcore.command.CommandBuilder;
 import com.youtube.hempfest.hempcore.event.EventBuilder;
@@ -36,7 +36,7 @@ public class GoldEconomy extends JavaPlugin {
 	private final Logger log = Logger.getLogger("Minecraft");
 	private static final HashMap<Player, MenuManager> GuiMap = new HashMap<>();
 	public VaultEconomy eco;
-	public AdvancedOverride advancedOverride;
+	public HemponomicEconomy advancedOverride;
 	private final PluginManager pm = getServer().getPluginManager();
 
 	//Start server
@@ -45,7 +45,7 @@ public class GoldEconomy extends JavaPlugin {
 //		registerCommands();
 		new CommandBuilder(this).compileFields("com.youtube.hempfest.goldeco.commands");
 		registerMetrics(9063);
-		new EventBuilder(this).compileFields("com.youtube.hempfest.goldeco.listeners.bukkit");
+		new EventBuilder(this).compileFields("com.youtube.hempfest.goldeco.construct.bukkit");
 		setInstance(this);
 		loadConfiguration();
 		loadDefaults();
@@ -85,7 +85,7 @@ public class GoldEconomy extends JavaPlugin {
 
 	private void registerEconomyExpansion() {
 		if (Bukkit.getPluginManager().isPluginEnabled("Hemponomics")) {
-			advancedOverride = new AdvancedOverride();
+			advancedOverride = new HemponomicEconomy();
 			AdvancedEconomyHook hook = new AdvancedEconomyHook(this);
 			hook.hook();
 		}
@@ -168,6 +168,11 @@ public class GoldEconomy extends JavaPlugin {
 		if (!main.exists()) {
 			InputStream m1 = getResource("shop_messages.yml");
 			Config.copyTo(m1, main);
+		}
+		Config main2 = Config.get("shop_config");
+		if (!main2.exists()) {
+			InputStream m1 = getResource("shop_config.yml");
+			Config.copyTo(m1, main2);
 		}
 	}
 

@@ -50,18 +50,23 @@ public class InventoryBank extends EcoMenu {
             new InventoryBank(menu).open();
             break;
         case GOLD_NUGGET:
-            menu.setAccountID(bl.get(Utility.NAME));
-            Config main = Config.get("shop_config");
-            FileConfiguration fc = main.getConfig();
-            List<String> items = new ArrayList<>(fc.getStringList("Economy.currency-items"));
-            if (usingCustomCurrency()) {
-                menu.setItemToEdit(getPrimaryDollar());
-                menu.setItemTooEdit(getSecondaryDollar());
-            } else {
-                menu.setItemToEdit(items.get(0));
-                menu.setItemTooEdit(items.get(1));
+            try {
+                menu.setAccountID(bl.get(Utility.NAME));
+                Config main = Config.get("shop_config");
+                FileConfiguration fc = main.getConfig();
+                List<String> items = new ArrayList<>(fc.getStringList("Economy.currency-items"));
+                if (usingCustomCurrency()) {
+                    menu.setItemToEdit(getPrimaryDollar());
+                    menu.setItemTooEdit(getSecondaryDollar());
+                } else {
+                    menu.setItemToEdit(items.get(0));
+                    menu.setItemTooEdit(items.get(1));
+                }
+                new InventoryBankOptions(menu).open();
+            } catch (Exception ex) {
+                Bukkit.dispatchCommand(p, "eco bank create");
+                super.open();
             }
-            new InventoryBankOptions(menu).open();
             break;
         case TOTEM_OF_UNDYING:
             new InventoryShop(menu).open();
